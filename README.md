@@ -1,30 +1,40 @@
 vslint
 ======
-Vslint is a command line utility used for detecting inconsistencies in
+vslint is a command line tool used for detecting inconsistencies in
 Visual Studio project files.
 
 Features
 --------
 
-Currently vslint scans for these issues.
+Currently vslint scans for these issues:
 
 * Duplicate references
 * Missing files
 * Files that exist on disk but are not included in the project
 
 It will also try to locate .gitignore and .hgignore files and use them
-to filter unimportant issues.
+to try to avoid false positives.
 
 Usage
 -----
 
-	> vslint .
+	> vslint --help
+	vslint, a tool for detecting inconsistencies in Visual Studio project files
+	Usage: vslint [options..] path [path2 path3 ..]
+	
+	Options:
+	-h, --help              Prints this help message
+	-m, --machine-readable  Print results in an alternate machine readable format
+	-v, --verbose           Lists scanned projects even if no issues are found
+	-q, --quiet             Quiet unless issues are found
+	
+	> vslint -v
 	Project .\vslint\vslint.fsproj
 	  no issues
-
+	
 	Project .\vslint.Tests\vslint.Tests.fsproj
 	  no issues
-
+	
 	Found 0 issues
 
 Ignored files and folders
