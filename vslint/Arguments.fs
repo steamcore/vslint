@@ -47,14 +47,18 @@ type Arguments(argv : array<string>) =
                 else if File.Exists(path) then Path.GetDirectoryName(path)
                 else ""
             | _ -> ""
-        parsedArguments
-        |> Seq.map getPath
-        |> Seq.filter (fun x -> not (String.IsNullOrWhiteSpace x))
-        |> Seq.distinct
-        |> List.ofSeq
+        let paths =
+            parsedArguments
+            |> Seq.map getPath
+            |> Seq.filter (fun x -> not (String.IsNullOrWhiteSpace x))
+            |> Seq.distinct
+            |> List.ofSeq
+        if paths.IsEmpty then ["."]
+        else paths
 
     static member PrintOptions =
         printfn "Options:"
+        printfn "-h, --help              Prints this help message"
         printfn "-m, --machine-readable  Print results in an alternate machine readable format"
         printfn "-v, --verbose           Lists scanned projects even if no issues are found"
-        printfn "-q, --quiet             Quiet, no output at all"
+        printfn "-q, --quiet             Quiet unless issues are found"

@@ -23,11 +23,10 @@ let main argv =
             analyzeProject projectPath (tryFindSourceControlRoot projectPath)
 
         let printResults (results : AnalysisResult) =
-            if not args.Quiet then
-                if args.PrintMachineReadable then
-                    results.PrintMachineReadable
-                else
-                    results.PrintHumanReadable args.Verbose
+            if args.PrintMachineReadable then
+                results.PrintMachineReadable args.Verbose
+            else
+                results.PrintHumanReadable args.Verbose
             results
 
         let results =

@@ -21,8 +21,9 @@ type AnalysisResult (projectPath : string, duplicateItems : seq<string>, itemsNo
     member this.NumberOfIssues = this.DuplicateItems.Length + this.ItemsNotInProject.Length + this.ItemsNotOnDisk.Length
     member this.IssuesDetected = this.NumberOfIssues > 0
     member this.PrintHumanReadable (verbose : bool) =
-        if this.IssuesDetected then
+        if this.IssuesDetected || verbose then
             printfn "Project %s" projectPath
+        if this.IssuesDetected then
             if not (List.isEmpty this.DuplicateItems) then
                 printWarning "  References with multiple declarations found:"
                 for item in this.DuplicateItems do
@@ -36,13 +37,13 @@ type AnalysisResult (projectPath : string, duplicateItems : seq<string>, itemsNo
                 for item in this.ItemsNotOnDisk do
                     printError "    %s" item
             printfn ""
-        elif (verbose) then
-            printfn "Project %s" projectPath
+        elif verbose then
             printfn "  no issues"
             printfn ""
-    member this.PrintMachineReadable =
-        if this.IssuesDetected then
+    member this.PrintMachineReadable (verbose : bool) =
+        if this.IssuesDetected || verbose then
             printfn "# %s" projectPath
+        if this.IssuesDetected then
             if not (List.isEmpty this.DuplicateItems) then
                 for item in this.DuplicateItems do
                     printfn "D %s" item
