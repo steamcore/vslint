@@ -12,8 +12,10 @@ let main argv =
 
     let args = new Arguments(argv)
 
-    if args.PathsToExamine.IsEmpty then
+    if args.PathsToExamine.IsEmpty || args.PrintHelp then
+        printfn "vslint, a tool for detecting inconsistencies in Visual Studio project files"
         printfn "Usage: vslint [options..] path [path2 path3 ..]"
+        printfn ""
         Arguments.PrintOptions
         0
     else
@@ -21,10 +23,11 @@ let main argv =
             analyzeProject projectPath (tryFindSourceControlRoot projectPath)
 
         let printResults (results : AnalysisResult) =
-            if args.PrintMachineReadable then
-                results.PrintMachineReadable
-            else
-                results.PrintHumanReadable args.PrintOnlyIssues
+            if not args.Quiet then
+                if args.PrintMachineReadable then
+                    results.PrintMachineReadable
+                else
+                    results.PrintHumanReadable args.Verbose
             results
 
         let results =
@@ -40,8 +43,8 @@ let main argv =
             results
             |> List.sumBy (fun x -> x.NumberOfIssues)
 
-        if (not args.PrintMachineReadable && (not args.PrintOnlyIssues || numErrors > 0)) then
-            printfn "Found %d issues" numErrors
+        if (not args.Quiet && not args.PrintMachineReadable) then
+            printfn "Scanned %d projects, found %d issues" results.Length numErrors
 
         if numErrors > 0 then 1
         else 0

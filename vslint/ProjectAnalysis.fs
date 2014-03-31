@@ -20,7 +20,7 @@ type AnalysisResult (projectPath : string, duplicateItems : seq<string>, itemsNo
     member this.ItemsNotOnDisk = itemsNotOnDisk |> List.ofSeq
     member this.NumberOfIssues = this.DuplicateItems.Length + this.ItemsNotInProject.Length + this.ItemsNotOnDisk.Length
     member this.IssuesDetected = this.NumberOfIssues > 0
-    member this.PrintHumanReadable (printOnlyIssues : bool) =
+    member this.PrintHumanReadable (verbose : bool) =
         if this.IssuesDetected then
             printfn "Project %s" projectPath
             if not (List.isEmpty this.DuplicateItems) then
@@ -36,7 +36,7 @@ type AnalysisResult (projectPath : string, duplicateItems : seq<string>, itemsNo
                 for item in this.ItemsNotOnDisk do
                     printError "    %s" item
             printfn ""
-        elif (not printOnlyIssues) then
+        elif (verbose) then
             printfn "Project %s" projectPath
             printfn "  no issues"
             printfn ""

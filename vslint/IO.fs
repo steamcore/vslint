@@ -15,13 +15,6 @@ let directoriesToIgnore =
     ]
 
 /// <summary>
-/// Check if a path is a directory
-/// </summary>
-/// <param name="path">Path to check</param>
-let isDirectory path =
-    (File.GetAttributes path &&& FileAttributes.Directory) = FileAttributes.Directory
-
-/// <summary>
 /// Returns a list of directory names in a specified path
 /// The result is cached for future invocations
 /// </summary>
@@ -101,7 +94,7 @@ let rec findProjectFiles (path : string) =
 /// </summary>
 /// <param name="path">File or directory</param>
 let rec tryFindSourceControlRoot (path : string) =
-    if not (isDirectory path) then
+    if not (Directory.Exists path) then
         tryFindSourceControlRoot (Path.GetDirectoryName path)
     else
         let hasDotGit = enumerateDirectories path |> List.exists (fun x -> Path.GetFileName(x) = ".git")
