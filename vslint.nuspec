@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>vslint</id>
+    <version>1.0.0</version>
+    <authors>Steamcore</authors>
+    <owners>Steamcore</owners>
+    <projectUrl>https://github.com/steamcore/vslint/</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Command line tool for detecting inconsistencies in Visual Studio project files.</description>
+    <releaseNotes></releaseNotes>
+    <dependencies></dependencies>
+    <frameworkAssemblies></frameworkAssemblies>
+    <tags>visualstudio csproj fsproj vbproj</tags>
+  </metadata>
+  <files>
+    <file src="vslint\bin\Release\vslint.exe" target="tools" />
+  </files>
+</package>
