@@ -1,7 +1,9 @@
 VSLint
 ======
+
 VSLint is a command line tool used for detecting inconsistencies in
 Visual Studio project files.
+
 
 Features
 --------
@@ -15,6 +17,7 @@ Currently VSLint scans for these issues:
 It will also try to locate .gitignore and .hgignore files and use them
 to try to avoid false positives.
 
+
 Limitations
 -----------
 
@@ -23,6 +26,7 @@ Due to the complexity VSLint will not parse conditional includes or targets file
 Complex .gitignore GLOBs may not be parsed properly, internally GLOBs are converted
 to regular expressions with a pretty naive implementation that works in most cases.
 For example, negated patterns are not honored.
+
 
 Usage
 -----
@@ -46,8 +50,10 @@ Usage
 	
 	Found 0 issues
 
+
 Ignored files and folders
 -------------------------
+
 Even if you don't have a .gitignore or .hgignore some files and folders
 are ignored by default.
 
@@ -73,8 +79,10 @@ are ignored by default.
 * .user
 * .orig
 
+
 .vslintignore
 -------------
+
 If you have additional files that should be ignored you may add a
 file named .vslintignore with one regular expression per line.
 
