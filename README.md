@@ -28,8 +28,8 @@ to regular expressions with a pretty naive implementation that works in most cas
 For example, negated patterns are not honored.
 
 
-Usage
------
+Command line usage
+------------------
 
 	> vslint --help
 	vslint, a tool for detecting inconsistencies in Visual Studio project files
@@ -49,6 +49,19 @@ Usage
 	  no issues
 	
 	Found 0 issues
+
+
+Use as Mercurial commit hook
+----------------------------
+
+VSLint can be used as a pre commit hook in Mercurial to prevent commits with
+errors in project files that may, for instance, arise in auto merges.
+
+Simply add vslint.exe to your path and add the following to your hgrc.
+
+	[hooks]
+	precommit =
+	precommit.vslint = vslint
 
 
 Ignored files and folders
