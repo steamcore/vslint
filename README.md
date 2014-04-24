@@ -15,6 +15,15 @@ Currently VSLint scans for these issues:
 It will also try to locate .gitignore and .hgignore files and use them
 to try to avoid false positives.
 
+Limitations
+-----------
+
+Due to the complexity VSLint will not parse conditional includes or targets files.
+
+Complex .gitignore GLOBs may not be parsed properly, internally GLOBs are converted
+to regular expressions with a pretty naive implementation that works in most cases.
+For example, negated patterns are not honored.
+
 Usage
 -----
 
