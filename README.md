@@ -1,12 +1,12 @@
-vslint
+VSLint
 ======
-vslint is a command line tool used for detecting inconsistencies in
+VSLint is a command line tool used for detecting inconsistencies in
 Visual Studio project files.
 
 Features
 --------
 
-Currently vslint scans for these issues:
+Currently VSLint scans for these issues:
 
 * Duplicate references
 * Missing files
