@@ -12,6 +12,7 @@ let directoriesToIgnore =
         ".git";
         ".hg";
         ".svn";
+        "node_modules";
     ]
 
 /// <summary>
@@ -21,9 +22,13 @@ let directoriesToIgnore =
 /// <param name="path">Path to directory</param>
 let enumerateDirectories =
     let enumerateDirectoriesInternal path =
-        Directory.EnumerateDirectories path
-        |> Seq.cast<string>
-        |> List.ofSeq
+        try
+            Directory.EnumerateDirectories path
+            |> Seq.cast<string>
+            |> List.ofSeq
+        with
+            | :? System.IO.PathTooLongException -> printfn "warning, path too long (could not enumerate all directories)"; List.empty
+            | :? System.UnauthorizedAccessException -> printfn "warning, access denied (could not enumerate all directories)"; List.empty
     memoize enumerateDirectoriesInternal
 
 /// <summary>
@@ -33,9 +38,13 @@ let enumerateDirectories =
 /// <param name="path">Path to directory</param>
 let enumerateFiles =
     let enumerateFilesInternal path =
-        Directory.EnumerateFiles path
-        |> Seq.cast<string>
-        |> List.ofSeq
+        try
+            Directory.EnumerateFiles path
+            |> Seq.cast<string>
+            |> List.ofSeq
+        with
+            | :? System.IO.PathTooLongException -> printfn "warning, path too long (could not enumerate all files)"; List.empty
+            | :? System.UnauthorizedAccessException -> printfn "warning, access denied (could not enumerate all files)"; List.empty
     memoize enumerateFilesInternal
 
 /// <summary>
@@ -75,19 +84,16 @@ let rec getFilesFromDirectory (path : string) (relativeTo : string) =
 /// </summary>
 /// <param name="path">Root directory</param>
 let rec findProjectFiles (path : string) =
-    try
-        let projectsFromSubdirectories =
-            enumerateDirectories path
-            |> Seq.filter (fun x -> not (directoriesToIgnore.Contains <| Path.GetFileName(x)))
-            |> Array.ofSeq
-            |> Array.Parallel.map findProjectFiles
-            |> Seq.concat
-        let projects =
-            enumerateFiles path
-            |> Seq.filter (fun x -> Regex.IsMatch(x, @"\.(fs|cs|vb)proj$"))
-        Seq.concat [projectsFromSubdirectories; projects]
-    with
-        | :? System.IO.PathTooLongException -> printfn "findProjectFiles error: path too long"; Seq.empty
+    let projectsFromSubdirectories =
+        enumerateDirectories path
+        |> Seq.filter (fun x -> not (directoriesToIgnore.Contains <| Path.GetFileName(x)))
+        |> Array.ofSeq
+        |> Array.Parallel.map findProjectFiles
+        |> Seq.concat
+    let projects =
+        enumerateFiles path
+        |> Seq.filter (fun x -> Regex.IsMatch(x, @"\.(fs|cs|vb)proj$"))
+    Seq.concat [projectsFromSubdirectories; projects]
 
 /// <summary>
 /// Try to locate the source control root by 
