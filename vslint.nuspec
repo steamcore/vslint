@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>VSLint</id>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <authors>Steamcore</authors>
     <owners>Steamcore</owners>
     <projectUrl>https://github.com/steamcore/vslint/</projectUrl>
@@ -15,5 +15,6 @@
   </metadata>
   <files>
     <file src="vslint\bin\Release\vslint.exe" target="tools" />
+    <file src="vslint\bin\Release\FSharp.Core.dll" target="tools" />
   </files>
 </package>
