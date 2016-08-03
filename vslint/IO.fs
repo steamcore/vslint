@@ -15,6 +15,14 @@ let directoriesToIgnore =
         "node_modules";
     ]
 
+let private pathTooLong path =
+    printfn "warning, path too long \"%s\"" path
+    List.empty
+
+let private unauthorizedAccess path =
+    printfn "warning, access denied \"%s\"" path
+    List.empty
+
 /// <summary>
 /// Returns a list of directory names in a specified path
 /// The result is cached for future invocations
@@ -27,8 +35,8 @@ let enumerateDirectories =
             |> Seq.cast<string>
             |> List.ofSeq
         with
-            | :? System.IO.PathTooLongException -> printfn "warning, path too long (could not enumerate all directories)"; List.empty
-            | :? System.UnauthorizedAccessException -> printfn "warning, access denied (could not enumerate all directories)"; List.empty
+            | :? System.IO.PathTooLongException -> pathTooLong path
+            | :? System.UnauthorizedAccessException -> unauthorizedAccess path
     memoize enumerateDirectoriesInternal
 
 /// <summary>
@@ -43,8 +51,8 @@ let enumerateFiles =
             |> Seq.cast<string>
             |> List.ofSeq
         with
-            | :? System.IO.PathTooLongException -> printfn "warning, path too long (could not enumerate all files)"; List.empty
-            | :? System.UnauthorizedAccessException -> printfn "warning, access denied (could not enumerate all files)"; List.empty
+            | :? System.IO.PathTooLongException -> pathTooLong path
+            | :? System.UnauthorizedAccessException -> unauthorizedAccess path
     memoize enumerateFilesInternal
 
 /// <summary>
