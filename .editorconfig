@@ -1,0 +1,21 @@
+
+root = true
+
+[*]
+end_of_line = crlf
+indent_style = tab
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[*.fs]
+charset = utf-8
+indent_style = space
+indent_size = 4
+
+[*.config]
+indent_style = space
+indent_size = 2
+
+[*.fsproj]
+indent_style = space
+indent_size = 2
