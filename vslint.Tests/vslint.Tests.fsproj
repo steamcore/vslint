@@ -55,6 +55,7 @@
     <Compile Include="MercurialSupportTests.fs" />
     <None Include="packages.config" />
     <None Include="app.config" />
+    <Compile Include="ProjectParsingTests.fs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\vslint\vslint.fsproj">

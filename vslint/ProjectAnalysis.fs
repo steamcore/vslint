@@ -92,9 +92,11 @@ let analyzeProject projectPath sourceControlRoot =
         |> Seq.map (fun (x,ignore) -> x)
         |> List.ofSeq
 
-    let itemsInProject =
+    let project =
         parseProject <| readAllText projectPath
-        |> List.ofSeq
+
+    let itemsInProject =
+        project.items
 
     let itemsOnDisk =
         getFilesFromDirectory projectDirectory projectDirectory
@@ -103,15 +105,10 @@ let analyzeProject projectPath sourceControlRoot =
     let duplicateItems =
         findDuplicates itemsInProject
 
-    let projectSet =
-        itemsInProject
-        |> List.map (fun x -> x.ToLower())
-        |> Set.ofList
-
     let itemsNotInProjectTask =
         System.Threading.Tasks.Task.Factory.StartNew(fun () ->
             itemsOnDisk
-            |> Seq.filter (fun x -> not (projectSet.Contains (x.ToLower())))
+            |> Seq.filter (fun x -> not (project.isIncluded x))
             |> filterIgnoredResultsInParallel
         )
 
