@@ -3,18 +3,37 @@ VSLint
 
 [![NuGet](https://img.shields.io/nuget/v/VSLint.svg?maxAge=259200)](https://www.nuget.org/packages/VSLint/)
 
-VSLint is a command line tool used for detecting inconsistencies in
+VSLint is a command line tool used for detecting issues in
 Visual Studio project files.
 
 
 Features
 --------
 
-Currently VSLint scans for these issues:
+VSLint scans for the following issues.
 
-* Duplicate references
-* Missing files
-* Files that exist on disk but are not included in the project
+<table>
+	<tr>
+		<th></th>
+		<th>Classic project format</th>
+		<th>Modern project format</th>
+	</tr>
+	<tr>
+		<th>Duplicate file references</th>
+		<td>Yes</td>
+		<td>Yes</td>
+	</tr>
+	<tr>
+		<th>Missing files</th>
+		<td>Yes</td>
+		<td>Yes</td>
+	</tr>
+	<tr>
+		<th>Files on disk not included in project</th>
+		<td>Yes</td>
+		<td>No</td>
+	</tr>
+</table>
 
 It will also try to locate .gitignore and .hgignore files and use them
 to try to avoid false positives.
@@ -36,30 +55,36 @@ Command line usage
 	> vslint --help
 	vslint, a tool for detecting inconsistencies in Visual Studio project files
 	Usage: vslint [options..] path [path2 path3 ..]
-	
+
 	Options:
 	-h, --help              Prints this help message
 	-m, --machine-readable  Print results in an alternate machine readable format
 	-v, --verbose           Lists scanned projects even if no issues are found
 	-q, --quiet             Quiet unless issues are found
-	
+
 	> vslint -v
 	Project .\vslint\vslint.fsproj
 	  no issues
-	
+
 	Project .\vslint.Tests\vslint.Tests.fsproj
 	  no issues
-	
+
 	Found 0 issues
 
 
-Use as Mercurial commit hook
-----------------------------
+Use as commit hook
+------------------
 
-VSLint can be used as a pre commit hook in Mercurial to prevent commits with
+VSLint can be used as a pre commit hook in either git or Mercurial to prevent commits with
 errors in project files that may, for instance, arise in auto merges.
 
-Simply add vslint.exe to your path and add the following to your hgrc.
+For use with git, add vslint.exe to your path and create a `.git/hooks/pre-commit` file with the following contents.
+
+	#!/bin/bash
+
+	vslint
+
+For use with Mercurial, add vslint.exe to your path and add the following to your `.hg/hgrc` file.
 
 	[hooks]
 	precommit =
