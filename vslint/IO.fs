@@ -104,7 +104,7 @@ let rec findProjectFiles (path : string) =
     Seq.concat [projectsFromSubdirectories; projects]
 
 /// <summary>
-/// Try to locate the source control root by 
+/// Try to locate the source control root by
 /// </summary>
 /// <param name="path">File or directory</param>
 let rec tryFindSourceControlRoot (path : string) =

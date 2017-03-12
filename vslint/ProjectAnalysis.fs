@@ -83,7 +83,7 @@ let analyzeProject projectPath sourceControlRoot =
             let patternSet = getIgnorePatterns projectPath |> List.sort |> Set.ofList
             new Regex(String.Join("|", patternSet), RegexOptions.Singleline ||| RegexOptions.IgnoreCase)
         fun path -> ignoreExpression.IsMatch <| getPathRelativeToSourceControlRoot path
-    
+
     let filterIgnoredResultsInParallel (results : seq<string>) =
         results
         |> Array.ofSeq
