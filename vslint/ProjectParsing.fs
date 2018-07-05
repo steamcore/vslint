@@ -2,7 +2,6 @@
 module ProjectParsing
 
 open System
-open System.Web
 open System.Xml
 open System.Xml.Linq
 open System.Xml.XPath
@@ -25,7 +24,7 @@ let readIncludes (doc : XDocument, xpath : string, namespaces : XmlNamespaceMana
     |> Seq.cast<XElement>
     |> Seq.map (fun x -> (x.Attribute <| XName.Get "Include"))
     |> Seq.map (fun x -> x.Value)
-    |> Seq.map HttpUtility.UrlDecode
+    |> Seq.map Uri.UnescapeDataString
     |> Seq.filter (fun x -> not (x.EndsWith @"\"))
     |> List.ofSeq
 
