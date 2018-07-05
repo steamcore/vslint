@@ -33,7 +33,7 @@ let readIncludes (doc : XDocument, xpath : string, namespaces : XmlNamespaceMana
 /// Represents a classic MSBuild project where all files needs to be explicitly included
 /// </summary>
 type ClassicProject (doc : XDocument) =
-    member this.items =
+    let projectItems =
         let namespaces =
             let projectns = "http://schemas.microsoft.com/developer/msbuild/2003"
             let nsmgr = new XmlNamespaceManager(new NameTable())
@@ -42,23 +42,27 @@ type ClassicProject (doc : XDocument) =
         let xpath = "//*[@Include]" + String.Join("", (excludedTypes |> Seq.map (fun x -> "[not(self::ns:" + x + ")]")))
         readIncludes(doc, xpath, namespaces)
 
-    member this.itemSet =
-        this.items
+    let itemSet =
+        projectItems
         |> List.map (fun x -> x.ToLower())
         |> Set.ofList
 
+    member this.items = projectItems
+
     member this.isIncluded (path : string) =
         let normalizedPath = path.ToLower()
-        this.itemSet.Contains normalizedPath
+        itemSet.Contains normalizedPath
 
 /// <summary>
 /// Represents modern MSBuild projects where most files (if not all) are automatically included
 /// </summary>
 type ModernProject (doc : XDocument) =
-    member this.items =
+    let projectItems =
         let namespaces = new XmlNamespaceManager(new NameTable())
         let xpath = "//*[@Include]" + String.Join("", (excludedTypes |> Seq.map (fun x -> "[not(self::" + x + ")]")))
         readIncludes(doc, xpath, namespaces)
+
+    member this.items = projectItems
 
     // For now let's just say everything is included
     member this.isIncluded (path : string) =
