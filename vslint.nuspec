@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>VSLint</id>
-    <version>1.0.3</version>
+    <version>1.0.4</version>
     <authors>Steamcore</authors>
     <owners>Steamcore</owners>
     <projectUrl>https://github.com/steamcore/vslint/</projectUrl>
@@ -14,7 +14,9 @@
     <tags>visualstudio csproj fsproj vbproj</tags>
   </metadata>
   <files>
-    <file src="vslint\bin\Release\vslint.exe" target="tools" />
-    <file src="vslint\bin\Release\FSharp.Core.dll" target="tools" />
+    <file src="vslint\bin\Release\net45\FSharp.Core.dll" target="tools" />
+    <file src="vslint\bin\Release\net45\System.ValueTuple.dll" target="tools" />
+    <file src="vslint\bin\Release\net45\vslint.Core.dll" target="tools" />
+    <file src="vslint\bin\Release\net45\vslint.exe" target="tools" />
   </files>
 </package>
