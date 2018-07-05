@@ -1,19 +1,18 @@
-﻿
+
 module vslint.GitSupportTests
 
-open NUnit.Framework
-open FsUnit
+open FsUnit.Xunit
+open Xunit
 
 open GitSupport
 
-[<TestFixture>]
 type ``parseGitIgnore tests``() =
 
-    [<Test>]
+    [<Fact>]
     member x.``given an empty list it should return an empty list `` () =
-        parseGitIgnore [] |> should equal []
+        parseGitIgnore [] |> should be Empty
 
-    [<Test>]
+    [<Fact>]
     member x.``given simple globs it should return expected results`` () =
         let input =
             [

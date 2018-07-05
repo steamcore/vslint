@@ -1,19 +1,18 @@
-﻿
+
 module vslint.MercurialSupportTests
 
-open NUnit.Framework
-open FsUnit
+open FsUnit.Xunit
+open Xunit
 
 open MercurialSupport
 
-[<TestFixture>]
 type ``parseHgIgnore tests``() =
 
-    [<Test>]
+    [<Fact>]
     member x.``given an empty list it should return an empty list `` () =
-        parseHgIgnore [] |> should equal []
+        parseHgIgnore [] |> should be Empty
 
-    [<Test>]
+    [<Fact>]
     member x.``given simple regexes it should return expected results`` () =
         let input =
             [
@@ -29,7 +28,7 @@ type ``parseHgIgnore tests``() =
             ]
         parseHgIgnore input |> should equal expected
 
-    [<Test>]
+    [<Fact>]
     member x.``given complex input it should return expected results`` () =
         let input =
             [
