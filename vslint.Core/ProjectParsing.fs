@@ -25,7 +25,7 @@ let readIncludes (doc : XDocument, xpath : string, namespaces : XmlNamespaceMana
     |> Seq.map (fun x -> (x.Attribute <| XName.Get "Include"))
     |> Seq.map (fun x -> x.Value)
     |> Seq.map Uri.UnescapeDataString
-    |> Seq.filter (fun x -> not (x.EndsWith @"\"))
+    |> Seq.filter (fun x -> not (x.EndsWith @"\" || x.Contains "*"))
     |> List.ofSeq
 
 /// <summary>
