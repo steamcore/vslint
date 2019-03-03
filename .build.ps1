@@ -8,7 +8,7 @@ param (
 )
 
 task Test {
-	exec { dotnet test .\vslint.Tests\vslint.Tests.fsproj }
+	exec { dotnet test .\test\vslint.Tests\vslint.Tests.fsproj }
 }
 
 task AssertVersion {
@@ -18,7 +18,7 @@ task AssertVersion {
 }
 
 task Build {
-	exec { dotnet build .\vslint\vslint.fsproj --configuration Release /p:Version=$Version }
+	exec { dotnet build .\src\vslint\vslint.fsproj --configuration Release /p:Version=$Version }
 }
 
 task Package Build, {

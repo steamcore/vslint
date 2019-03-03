@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\vslint.Core\vslint.Core.fsproj" />
+    <ProjectReference Include="..\..\src\vslint.Core\vslint.Core.fsproj" />
   </ItemGroup>
 
   <ItemGroup>

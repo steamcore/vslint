@@ -14,9 +14,9 @@
     <tags>visualstudio csproj fsproj vbproj</tags>
   </metadata>
   <files>
-    <file src="vslint\bin\Release\net45\FSharp.Core.dll" target="tools" />
-    <file src="vslint\bin\Release\net45\System.ValueTuple.dll" target="tools" />
-    <file src="vslint\bin\Release\net45\vslint.Core.dll" target="tools" />
-    <file src="vslint\bin\Release\net45\vslint.exe" target="tools" />
+    <file src="src\vslint\bin\Release\net45\FSharp.Core.dll" target="tools" />
+    <file src="src\vslint\bin\Release\net45\System.ValueTuple.dll" target="tools" />
+    <file src="src\vslint\bin\Release\net45\vslint.Core.dll" target="tools" />
+    <file src="src\vslint\bin\Release\net45\vslint.exe" target="tools" />
   </files>
 </package>
