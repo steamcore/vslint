@@ -16,6 +16,6 @@ indent_size = 4
 indent_style = space
 indent_size = 2
 
-[*.fsproj]
+[*.{fsproj,nuspec,props}]
 indent_style = space
 indent_size = 2

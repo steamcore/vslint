@@ -7,6 +7,7 @@
     <owners>Steamcore</owners>
     <projectUrl>https://github.com/steamcore/vslint/</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="expression">MIT</license>
     <description>Command line tool for detecting inconsistencies in Visual Studio project files.</description>
     <releaseNotes></releaseNotes>
     <dependencies></dependencies>

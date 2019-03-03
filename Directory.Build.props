@@ -1,0 +1,14 @@
+<Project>
+
+  <PropertyGroup>
+    <Authors>Steamcore</Authors>
+    <Description>VSLint is a command line utility used for detecting inconsistencies in Visual Studio project files.</Description>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/steamcore/vslint</PackageProjectUrl>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+  </PropertyGroup>
+
+</Project>

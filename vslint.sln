@@ -20,6 +20,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{6DE19761-448
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{027D014D-7F93-4FB2-90FD-9135140B4735}"
 EndProject
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "dotnet-vslint", "src\dotnet-vslint\dotnet-vslint.fsproj", "{41FA18C0-7BC1-484F-8082-9C3082BC03D6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -38,6 +40,10 @@ Global
 		{E2035298-C7F6-4E3B-830F-1E5125BF5044}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E2035298-C7F6-4E3B-830F-1E5125BF5044}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E2035298-C7F6-4E3B-830F-1E5125BF5044}.Release|Any CPU.Build.0 = Release|Any CPU
+		{41FA18C0-7BC1-484F-8082-9C3082BC03D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{41FA18C0-7BC1-484F-8082-9C3082BC03D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{41FA18C0-7BC1-484F-8082-9C3082BC03D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{41FA18C0-7BC1-484F-8082-9C3082BC03D6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -46,6 +52,7 @@ Global
 		{296D65EA-EA63-4856-907B-E0037826EC62} = {6DE19761-4486-48EA-B8FA-64EA3B827693}
 		{D095F3E9-2A47-42CB-B408-92B3773DD019} = {027D014D-7F93-4FB2-90FD-9135140B4735}
 		{E2035298-C7F6-4E3B-830F-1E5125BF5044} = {6DE19761-4486-48EA-B8FA-64EA3B827693}
+		{41FA18C0-7BC1-484F-8082-9C3082BC03D6} = {6DE19761-4486-48EA-B8FA-64EA3B827693}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C4708BC8-9D59-4547-B9D5-7738B986C4B5}

@@ -4,11 +4,20 @@
 #>
 param (
     [string]
-    $Version
+	$Version,
+
+	[string]
+	$Output = "packages"
 )
 
 task Test {
 	exec { dotnet test .\test\vslint.Tests\vslint.Tests.fsproj }
+}
+
+task AssertOutput {
+	if (-not (Test-Path $Output)) {
+		mkdir $Output | Out-Null
+	}
 }
 
 task AssertVersion {
@@ -17,12 +26,16 @@ task AssertVersion {
 	}
 }
 
-task Build {
+task BuildStandalone {
 	exec { dotnet build .\src\vslint\vslint.fsproj --configuration Release /p:Version=$Version }
 }
 
-task Package Build, {
-	exec { nuget pack vslint.nuspec -Version $Version }
+task PackageStandalone BuildStandalone, {
+	exec { nuget pack vslint.nuspec -OutputDirectory (Resolve-Path $Output) -Version $Version }
 }
 
-task . AssertVersion, Test, Package
+task PackageTool {
+	exec { dotnet pack .\src\dotnet-vslint\dotnet-vslint.fsproj --configuration Release --output (Resolve-Path $Output) /p:Version=$Version }
+}
+
+task . AssertVersion, AssertOutput, Test, PackageStandalone, PackageTool
