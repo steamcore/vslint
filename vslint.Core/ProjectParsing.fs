@@ -14,6 +14,7 @@ let excludedTypes =
         "DotNetCliToolReference";
         "Reference";
         "PackageReference";
+        "ProjectCapability";
         "ProjectReference";
         "PublishFile";
         "Service";
