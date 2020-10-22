@@ -1,7 +1,8 @@
 VSLint
 ======
 
-[![NuGet](https://img.shields.io/nuget/v/VSLint.svg?maxAge=259200)](https://www.nuget.org/packages/VSLint/)
+[![NuGet](https://img.shields.io/nuget/v/VSLint.svg?maxAge=259200&label=VSLint)](https://www.nuget.org/packages/VSLint/)
+[![NuGet](https://img.shields.io/nuget/v/dotnet-vslint.svg?maxAge=259200&label=dotnet-vslint)](https://www.nuget.org/packages/dotnet-vslint/)
 
 VSLint is a command line tool used for detecting issues in
 Visual Studio project files.
