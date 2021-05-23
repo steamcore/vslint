@@ -10,10 +10,6 @@ param (
 	$Output = "packages"
 )
 
-task Test {
-	exec { dotnet test .\test\vslint.Tests\vslint.Tests.fsproj }
-}
-
 task AssertOutput {
 	if (-not (Test-Path $Output)) {
 		mkdir $Output | Out-Null
@@ -26,16 +22,30 @@ task AssertVersion {
 	}
 }
 
+task DotnetRestore {
+    exec { dotnet restore }
+}
+
+task DotnetBuild DotnetRestore, {
+    exec { dotnet build --no-restore }
+}
+
+task DotnetTest {
+	exec { dotnet test .\test\vslint.Tests\vslint.Tests.fsproj }
+}
+
 task BuildStandalone {
 	exec { dotnet build .\src\vslint\vslint.fsproj --configuration Release /p:Version=$Version }
 }
 
-task PackageStandalone BuildStandalone, {
+task PackageStandalone AssertVersion, AssertOutput, BuildStandalone, {
 	exec { nuget pack vslint.nuspec -OutputDirectory (Resolve-Path $Output) -Version $Version }
 }
 
-task PackageTool {
+task PackageTool AssertVersion, AssertOutput, {
 	exec { dotnet pack .\src\dotnet-vslint\dotnet-vslint.fsproj --configuration Release --output (Resolve-Path $Output) /p:Version=$Version }
 }
 
-task . AssertVersion, AssertOutput, Test, PackageStandalone, PackageTool
+task Package PackageStandalone, PackageTool
+
+task . DotnetBuild, DotnetTest
