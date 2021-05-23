@@ -1,5 +1,4 @@
-VSLint
-======
+# VSLint
 
 [![NuGet](https://img.shields.io/nuget/v/VSLint.svg?maxAge=259200&label=VSLint)](https://www.nuget.org/packages/VSLint/)
 [![NuGet](https://img.shields.io/nuget/v/dotnet-vslint.svg?maxAge=259200&label=dotnet-vslint)](https://www.nuget.org/packages/dotnet-vslint/)
@@ -8,40 +7,21 @@ VSLint is a command line tool used for detecting issues in
 Visual Studio project files.
 
 
-Features
---------
+## Features
 
 VSLint scans for the following issues.
 
-<table>
-	<tr>
-		<th></th>
-		<th>Classic project format</th>
-		<th>Modern project format</th>
-	</tr>
-	<tr>
-		<th>Duplicate file references</th>
-		<td>Yes</td>
-		<td>Yes</td>
-	</tr>
-	<tr>
-		<th>Missing files</th>
-		<td>Yes</td>
-		<td>Yes</td>
-	</tr>
-	<tr>
-		<th>Files on disk not included in project</th>
-		<td>Yes</td>
-		<td>No</td>
-	</tr>
-</table>
+|                                       | Classic project format | Modern project format |
+|---------------------------------------|------------------------|-----------------------|
+| Duplicate file references             | Yes                    | Yes                   |
+| Missing files                         | Yes                    | Yes                   |
+| Files on disk not included in project | Yes                    | No                    |
 
 It will also try to locate .gitignore and .hgignore files and use them
 to try to avoid false positives.
 
 
-Limitations
------------
+## Limitations
 
 Due to the complexity VSLint will not parse conditional includes or targets files.
 
@@ -50,8 +30,7 @@ to regular expressions with a pretty naive implementation that works in most cas
 For example, negated patterns are not honored.
 
 
-Command line usage
-------------------
+## Command line usage
 
 	> vslint --help
 	vslint, a tool for detecting inconsistencies in Visual Studio project files
@@ -73,27 +52,28 @@ Command line usage
 	Found 0 issues
 
 
-Use as commit hook
-------------------
+## Use as commit hook
 
 VSLint can be used as a pre commit hook in either git or Mercurial to prevent commits with
 errors in project files that may, for instance, arise in auto merges.
 
 For use with git, add vslint.exe to your path and create a `.git/hooks/pre-commit` file with the following contents.
 
-	#!/bin/bash
+```sh
+#!/bin/bash
 
-	vslint
+vslint
+```
 
 For use with Mercurial, add vslint.exe to your path and add the following to your `.hg/hgrc` file.
 
-	[hooks]
-	precommit =
-	precommit.vslint = vslint
+```ini
+[hooks]
+precommit =
+precommit.vslint = vslint
+```
 
-
-Ignored files and folders
--------------------------
+## Ignored files and folders
 
 Even if you don't have a .gitignore or .hgignore some files and folders
 are ignored by default.
@@ -121,8 +101,7 @@ are ignored by default.
 * .orig
 
 
-.vslintignore
--------------
+## .vslintignore
 
 If you have additional files that should be ignored you may add a
 file named .vslintignore with one regular expression per line.
@@ -131,8 +110,10 @@ Lines starting with # are comments, empty lines are ignored.
 
 *Sample*
 
-	# Ignore powershell files
-	\.ps(m|1)$
+```sh
+# Ignore powershell files
+\.ps(m|1)$
 
-	# Ignore ReSharper files
-	_ReSharper\.*/
+# Ignore ReSharper files
+_ReSharper\.*/
+```
