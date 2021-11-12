@@ -13,8 +13,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="../vslint/Arguments.fs" />
-    <Compile Include="../vslint/Program.fs" />
+    <Compile Include="Arguments.fs" />
+    <Compile Include="Program.fs" />
   </ItemGroup>
 
 </Project>

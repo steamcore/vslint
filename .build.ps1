@@ -40,24 +40,12 @@ task DotnetTest {
 	}
 }
 
-task BuildStandalone {
-	exec {
-		dotnet build .\src\vslint\vslint.fsproj --configuration Release /p:Version=$Version
-	}
-}
-
-task PackageStandalone AssertVersion, AssertOutput, BuildStandalone, {
-	exec {
-		nuget pack vslint.nuspec -OutputDirectory (Resolve-Path $Output) -Version $Version
-	}
-}
-
 task PackageTool AssertVersion, AssertOutput, {
 	exec {
 		dotnet pack .\src\dotnet-vslint\dotnet-vslint.fsproj --configuration Release --output (Resolve-Path $Output) /p:Version=$Version
 	}
 }
 
-task Package PackageStandalone, PackageTool
+task Package PackageTool
 
 task . DotnetBuild, DotnetTest
