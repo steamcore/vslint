@@ -6,10 +6,15 @@
     <PackAsTool>true</PackAsTool>
     <AssemblyName>dotnet-vslint</AssemblyName>
     <ToolCommandName>vslint</ToolCommandName>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\vslint.Core\vslint.Core.fsproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="../../README.md" Pack="true" PackagePath="/" />
   </ItemGroup>
 
   <ItemGroup>
