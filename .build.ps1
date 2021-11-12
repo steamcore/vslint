@@ -23,27 +23,39 @@ task AssertVersion {
 }
 
 task DotnetRestore {
-    exec { dotnet restore }
+    exec {
+		dotnet restore
+	}
 }
 
 task DotnetBuild DotnetRestore, {
-    exec { dotnet build --no-restore }
+    exec {
+		dotnet build --no-restore
+	}
 }
 
 task DotnetTest {
-	exec { dotnet test .\test\vslint.Tests\vslint.Tests.fsproj }
+	exec {
+		dotnet test .\test\vslint.Tests\vslint.Tests.fsproj
+	}
 }
 
 task BuildStandalone {
-	exec { dotnet build .\src\vslint\vslint.fsproj --configuration Release /p:Version=$Version }
+	exec {
+		dotnet build .\src\vslint\vslint.fsproj --configuration Release /p:Version=$Version
+	}
 }
 
 task PackageStandalone AssertVersion, AssertOutput, BuildStandalone, {
-	exec { nuget pack vslint.nuspec -OutputDirectory (Resolve-Path $Output) -Version $Version }
+	exec {
+		nuget pack vslint.nuspec -OutputDirectory (Resolve-Path $Output) -Version $Version
+	}
 }
 
 task PackageTool AssertVersion, AssertOutput, {
-	exec { dotnet pack .\src\dotnet-vslint\dotnet-vslint.fsproj --configuration Release --output (Resolve-Path $Output) /p:Version=$Version }
+	exec {
+		dotnet pack .\src\dotnet-vslint\dotnet-vslint.fsproj --configuration Release --output (Resolve-Path $Output) /p:Version=$Version
+	}
 }
 
 task Package PackageStandalone, PackageTool
