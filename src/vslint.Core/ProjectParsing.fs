@@ -18,6 +18,7 @@ let excludedTypes =
         "ProjectReference";
         "PublishFile";
         "Service";
+        "Using";
     ]
 
 let readIncludes (doc : XDocument, xpath : string, namespaces : XmlNamespaceManager) =
