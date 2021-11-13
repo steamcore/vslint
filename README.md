@@ -1,6 +1,5 @@
 # VSLint
 
-[![NuGet](https://img.shields.io/nuget/v/VSLint.svg?maxAge=259200&label=VSLint)](https://www.nuget.org/packages/VSLint/)
 [![NuGet](https://img.shields.io/nuget/v/dotnet-vslint.svg?maxAge=259200&label=dotnet-vslint)](https://www.nuget.org/packages/dotnet-vslint/)
 ![Build](https://github.com/steamcore/vslint/workflows/Build/badge.svg)
 
