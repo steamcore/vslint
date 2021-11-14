@@ -12,6 +12,7 @@ let excludedTypes =
         "BootstrapperPackage";
         "CodeAnalysisDependentAssemblyPaths";
         "DotNetCliToolReference";
+        "InternalsVisibleTo";
         "Reference";
         "PackageReference";
         "ProjectCapability";
