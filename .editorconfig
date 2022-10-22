@@ -19,3 +19,7 @@ indent_size = 2
 [*.{fsproj,nuspec,props}]
 indent_style = space
 indent_size = 2
+
+[*.{json,yml}]
+indent_style = space
+indent_size = 2
